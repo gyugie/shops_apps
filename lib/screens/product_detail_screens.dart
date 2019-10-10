@@ -9,8 +9,15 @@ class ProductDetailScreen extends StatelessWidget {
     print(productId);
     return Scaffold(
       appBar: AppBar(
-        title: Text('title', style: Theme.of(context).textTheme.title,
+        centerTitle: true, 
+        title: Text(
+          'title', 
+          style: Theme.of(context).textTheme.title,
+          textAlign: TextAlign.center,
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
     );
   }

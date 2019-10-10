@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './screens/product_detail_screens.dart';
 import './screens/products_overview_screens.dart';
+import './providers/products.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,7 +10,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      builder: (ctx) => Products(),
+      child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: Colors.black,
@@ -22,7 +26,7 @@ class MyApp extends StatelessWidget {
           title: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.white
+            color: Colors.black
           ),
           body1: TextStyle(
             fontSize: 12,
@@ -33,7 +37,8 @@ class MyApp extends StatelessWidget {
       home: ProductsOverviewScreens(),
       routes: {
         ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
-      },
+        },
+      ),
     );
   }
 }
