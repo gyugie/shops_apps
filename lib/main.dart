@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           )
         )
       ),
-      home: ProductsOverviewScreens(),
+      home: ProductOverviewScreens(),
       routes: {
         ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
         },
