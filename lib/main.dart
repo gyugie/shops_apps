@@ -22,32 +22,33 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: Colors.black,
-        accentColor: Colors.black54,
-        fontFamily: 'Lato',
-        textTheme: TextTheme(
-          headline: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold
-          ),
-          title: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.black
-          ),
-          body1: TextStyle(
-            fontSize: 12,
-            fontFamily: 'Hind'
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          accentColor: Colors.black54,
+          fontFamily: 'Lato',
+          textTheme: TextTheme(
+            headline: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold
+            ),
+            title: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black
+            ),
+            body1: TextStyle(
+              fontSize: 12,
+              fontFamily: 'Hind'
+            )
           )
-        )
-      ),
-      home: ProductOverviewScreens(),
-      routes: {
-        ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
-        },
-      ),
+        ),
+        home: ProductOverviewScreens(),
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
+          },
+        ),
     );
   }
 }
