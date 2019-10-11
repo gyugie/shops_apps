@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screens/cart_screens.dart';
 import '../widgets/product_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
@@ -61,11 +62,10 @@ class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
                   color: Colors.black,
                 ),
                 onPressed: () {
-
+                  Navigator.of(context).pushNamed(CartScreens.routeName);
                 },
               ), 
-        ),
-          
+          ),
         ],
       ),
       body: ProductsGrid(_isFavoritesItems),
