@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../widgets/cart_item.dart';
+import './cart.dart';
 
 class OrderItem{
   final String id;
@@ -24,13 +24,14 @@ class Orders with ChangeNotifier{
   }
 
   void addOrder(List<CartItem> cartProduct, double total){
+    
     OrderItem(
       id: DateTime.now().toString(), 
       amount: total, 
       products: cartProduct, 
       dateTime: DateTime.now()
     );
-    
+
     notifyListeners();
   }
 
