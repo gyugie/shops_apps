@@ -24,12 +24,14 @@ class Orders with ChangeNotifier{
   }
 
   void addOrder(List<CartItem> cartProduct, double total){
-    
+    _orders.insert(
+      0,
     OrderItem(
       id: DateTime.now().toString(), 
       amount: total, 
       products: cartProduct, 
       dateTime: DateTime.now()
+     ),
     );
 
     notifyListeners();

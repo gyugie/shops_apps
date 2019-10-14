@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_apps/widgets/app_drawer.dart';
 import '../screens/cart_screens.dart';
 import '../widgets/product_grid.dart';
 import '../widgets/badge.dart';
@@ -29,6 +30,7 @@ class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
           ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        iconTheme: IconThemeData(color: Colors.black), 
         actions: <Widget>[
           PopupMenuButton(
             onSelected: (FilterOptions selectedValue){
@@ -68,6 +70,7 @@ class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: ProductsGrid(_isFavoritesItems),
     );
   }
