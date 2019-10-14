@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 class CartItem {
   final String id;
   final String title;
+  final String imageUrl;
   final int quantity;
   final double price;
 
-  CartItem({this.id, this.title, this.quantity, this.price});
+  CartItem({this.id, this.title, this.imageUrl, this.quantity, this.price});
 }
 
 class Cart with ChangeNotifier {
@@ -31,7 +32,7 @@ class Cart with ChangeNotifier {
     return total;
   }
 
-  void addItem(String productId, double price, String title){
+  void addItem(String productId, double price, String title, String imageUrl){
     if( _items.containsKey(productId) ){
       //change quantity
       _items.update(
@@ -39,6 +40,7 @@ class Cart with ChangeNotifier {
         (existingCartItem) => CartItem(
                               id: existingCartItem.id,
                               title: existingCartItem.title,
+                              imageUrl: existingCartItem.imageUrl,
                               price: existingCartItem.price,
                               quantity: existingCartItem.quantity + 1
                             )
@@ -50,6 +52,7 @@ class Cart with ChangeNotifier {
         () => CartItem(
                 id: DateTime.now().toString(),
                 title: title,
+                imageUrl: imageUrl,
                 price: price,
                 quantity: 1
               ),
