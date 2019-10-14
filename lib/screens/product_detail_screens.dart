@@ -31,6 +31,45 @@ class ProductDetailScreen extends StatelessWidget {
           onPressed: () { Navigator.of(context).pop(); },
         ),
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                  loadedProduct.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              child: Text(
+                '\$ ${loadedProduct.price}', 
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Theme.of(context).accentColor,
+                  ),
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                '${loadedProduct.description}', 
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).accentColor,
+                  ),
+                softWrap: true,
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
