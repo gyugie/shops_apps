@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../providers/product.dart';
 
 class EditPoruductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
@@ -11,7 +12,8 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
   final _descriptionFocusNode = FocusNode();
   final _imageUrlController = TextEditingController();
   final _imageFocusNode     = FocusNode();
-
+  final _form               = GlobalKey<FormState>();
+  var _editedProduct        = Product(id: null,title: '', description: '', price: 0, imageUrl: '');
 
   @override 
   void initState(){
@@ -37,14 +39,29 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
     }
   }
 
+  void _saveProduct(){
+    _form.currentState.save();
+    print(_editedProduct.title);
+    print(_editedProduct.price);
+    print(_editedProduct.description);
+    print(_editedProduct.imageUrl);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: _saveProduct,
+          )
+        ],
       ),
       body: Form(
+        key: _form,
         child: ListView(
           padding: const EdgeInsets.all(10),
           children: <Widget>[
@@ -55,6 +72,15 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_priceFocusNode);
+              },
+              onSaved: (value){
+                _editedProduct = Product(
+                    id: null, 
+                    title: value,
+                    description: _editedProduct.description,
+                    price: _editedProduct.price,
+                    imageUrl: _editedProduct.imageUrl
+                  );
               },
             ),
             TextFormField(
@@ -67,6 +93,15 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
               onFieldSubmitted: (_){
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
+              onSaved: (value){
+                _editedProduct = Product(
+                    id: null, 
+                    title: _editedProduct.title,
+                    description: _editedProduct.description,
+                    price: value.isEmpty ? 0 : double.parse(value),
+                    imageUrl: _editedProduct.imageUrl
+                  );
+              },
             ),
             TextFormField(
               decoration: InputDecoration(
@@ -78,6 +113,15 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
               focusNode: _descriptionFocusNode,
               onFieldSubmitted: (_){
                 FocusScope.of(context).requestFocus(_imageFocusNode);
+              },
+              onSaved: (value){
+                _editedProduct = Product(
+                    id: null, 
+                    title: _editedProduct.title,
+                    description: value,
+                    price: _editedProduct.price,
+                    imageUrl: _editedProduct.imageUrl
+                  );
               },
             ),
             Row(
@@ -112,6 +156,18 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                   textInputAction: TextInputAction.done,
                   controller: _imageUrlController,
                   focusNode: _imageFocusNode,
+                  onFieldSubmitted: (_) {
+                        _saveProduct();
+                      },
+                  onSaved: (value){
+                  _editedProduct = Product(
+                    id: null, 
+                    title: _editedProduct.title,
+                    description: _editedProduct.description,
+                    price: _editedProduct.price,
+                    imageUrl: value
+                  );
+                 },
                 ),
                 ),
               ],
