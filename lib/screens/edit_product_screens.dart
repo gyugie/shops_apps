@@ -40,6 +40,12 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
   }
 
   void _saveProduct(){
+    final validate = _form.currentState.validate();
+
+    if(!validate){
+      return;
+    }
+
     _form.currentState.save();
     print(_editedProduct.title);
     print(_editedProduct.price);
@@ -70,6 +76,12 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                 labelText: 'Title'
               ),
               textInputAction: TextInputAction.next,
+              validator: (value){ 
+                if(value.isEmpty){
+                  return 'Title is required!';
+                }
+                return null;
+              },
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_priceFocusNode);
               },
@@ -90,6 +102,12 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.number,
               focusNode: _priceFocusNode,
+               validator: (value){ 
+                if(value.isEmpty){
+                  return 'Price is required!';
+                }
+                return null;
+              },
               onFieldSubmitted: (_){
                 FocusScope.of(context).requestFocus(_descriptionFocusNode);
               },
@@ -111,6 +129,12 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
               keyboardType: TextInputType.multiline,
               maxLines: 3,
               focusNode: _descriptionFocusNode,
+               validator: (value){ 
+                if(value.isEmpty){
+                  return 'Description is required!';
+                }
+                return null;
+              },
               onFieldSubmitted: (_){
                 FocusScope.of(context).requestFocus(_imageFocusNode);
               },
@@ -156,6 +180,12 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                   textInputAction: TextInputAction.done,
                   controller: _imageUrlController,
                   focusNode: _imageFocusNode,
+                  validator: (value){ 
+                    if(value.isEmpty){
+                      return 'Image URL is required!';
+                    }
+                    return null;
+                  },
                   onFieldSubmitted: (_) {
                         _saveProduct();
                       },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/user_product_screens.dart';
 import '../screens/order_screens.dart';
+import '../screens/offset.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -34,6 +35,14 @@ class AppDrawer extends StatelessWidget {
             title: Text('Manage Product'),
             onTap: (){
               Navigator.of(context).pushReplacementNamed(UserProductScreens.routeName);
+            },
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.desktop_mac),
+            title: Text('Offseting'),
+            onTap: (){
+              Navigator.of(context).pushReplacementNamed(CustomCard.routeName);
             },
           ),
         ],

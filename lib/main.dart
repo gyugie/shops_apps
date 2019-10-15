@@ -9,7 +9,7 @@ import './providers/orders.dart';
 import './screens/order_screens.dart';
 import './screens/user_product_screens.dart';
 import './screens/edit_product_screens.dart';
-
+import './screens/offset.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,7 +58,8 @@ class MyApp extends StatelessWidget {
             CartScreens.routeName: (ctx) => CartScreens(),
             OrderScreens.routeName: (ctx) => OrderScreens(),
             UserProductScreens.routeName: (ctx) => UserProductScreens(),
-            EditPoruductScreen.routeName: (ctx) => EditPoruductScreen()
+            EditPoruductScreen.routeName: (ctx) => EditPoruductScreen(),
+            CustomCard.routeName: (ctx) => CustomCard()
           },
         ),
     );
