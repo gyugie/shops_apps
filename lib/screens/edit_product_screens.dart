@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../providers/product.dart';
+import '../providers/products.dart';
 
 class EditPoruductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
@@ -47,10 +50,8 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
     }
 
     _form.currentState.save();
-    print(_editedProduct.title);
-    print(_editedProduct.price);
-    print(_editedProduct.description);
-    print(_editedProduct.imageUrl);
+    Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+    Navigator.of(context).pop();
   }
 
 
@@ -202,7 +203,7 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                     if(!value.startsWith('http') && !value.startsWith('https')){
                       return 'Please enter a valid URL';
                     }
-                    
+
                     return null;
                   },
                   onFieldSubmitted: (_) {
