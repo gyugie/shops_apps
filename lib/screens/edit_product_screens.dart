@@ -106,6 +106,15 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                 if(value.isEmpty){
                   return 'Price is required!';
                 }
+
+                if(double.tryParse(value) == null){
+                  return 'Please enter a valid number';
+                }
+
+                if(double.parse(value) <= 0){
+                  return 'Please enter a number greater than zero';
+                }
+
                 return null;
               },
               onFieldSubmitted: (_){
@@ -133,6 +142,11 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                 if(value.isEmpty){
                   return 'Description is required!';
                 }
+
+                if(value.length < 10){
+                  return 'Should be at least a long text';
+                }
+
                 return null;
               },
               onFieldSubmitted: (_){
@@ -184,6 +198,11 @@ class _EditPoruductScreenState extends State<EditPoruductScreen> {
                     if(value.isEmpty){
                       return 'Image URL is required!';
                     }
+
+                    if(!value.startsWith('http') && !value.startsWith('https')){
+                      return 'Please enter a valid URL';
+                    }
+                    
                     return null;
                   },
                   onFieldSubmitted: (_) {
