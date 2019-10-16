@@ -5,6 +5,8 @@ import '../screens/cart_screens.dart';
 import '../widgets/product_grid.dart';
 import '../widgets/badge.dart';
 import '../providers/cart.dart';
+import '../providers/products.dart';
+
 
 enum FilterOptions {
   Favorites,
@@ -17,7 +19,19 @@ class ProductOverviewScreens extends StatefulWidget {
 }
 
 class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
-  bool _isFavoritesItems = false;
+  bool _isFavoritesItems  = false;
+  var _isInit             = true;
+
+  @override
+  void didChangeDependencies() {
+    if(_isInit){
+
+      Provider.of<Products>(context).fetchAndSetProducts();
+    }
+    _isInit = false;
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
