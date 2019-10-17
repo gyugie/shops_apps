@@ -21,12 +21,17 @@ class ProductOverviewScreens extends StatefulWidget {
 class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
   bool _isFavoritesItems  = false;
   var _isInit             = true;
+  var _isLoading          = false;
 
   @override
   void didChangeDependencies() {
     if(_isInit){
-
-      Provider.of<Products>(context).fetchAndSetProducts();
+      _isLoading = true;
+      Provider.of<Products>(context).fetchAndSetProducts().then( (_){
+        setState(() {
+          _isLoading = false;
+        });
+      });
     }
     _isInit = false;
 
@@ -38,7 +43,7 @@ class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true, 
-        title: Text('MyShop',
+        title: Text('MyShops',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.title,
           ),
@@ -85,7 +90,11 @@ class _ProductOverviewScreensState extends State<ProductOverviewScreens> {
         ],
       ),
       drawer: AppDrawer(),
-      body: ProductsGrid(_isFavoritesItems),
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      )
+      :
+      ProductsGrid(_isFavoritesItems)
     );
   }
 }
