@@ -6,10 +6,27 @@ import '../widgets/app_drawer.dart';
 import '../providers/products.dart';
 import '../widgets/user_product_item.dart';
 
-class UserProductScreens extends StatelessWidget {
+class UserProductScreens extends StatefulWidget {
   static const routeName = '/user-product';
-  
+
+  @override
+  _UserProductScreensState createState() => _UserProductScreensState();
+}
+
+class _UserProductScreensState extends State<UserProductScreens> {
+  var _isLoading = true;
+
+  @override
+  void initState(){
+    _refreshProduct(context);
+    setState(() {
+      _isLoading = false;
+    });
+    super.initState();
+  }
+
   Future<void> _refreshProduct(context) async {
+     
     return await Provider.of<Products>(context, listen: false).fetchAndSetProducts();
   }
 
@@ -30,7 +47,11 @@ class UserProductScreens extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: RefreshIndicator(
+      body: _isLoading ? Center(
+        child: CircularProgressIndicator(),
+      )
+      :
+       RefreshIndicator(
           onRefresh: () => _refreshProduct(context),
           child: Padding(
             padding: EdgeInsets.all(8),
