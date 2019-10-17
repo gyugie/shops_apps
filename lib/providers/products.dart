@@ -152,28 +152,4 @@ class Products with ChangeNotifier{
       existingProduct = null;
   }
 
-  Future<void> isFavoriteProduct(String id, bool isFavorites) async{
-    final url                     = 'https://flutter-update-32aaf.firebaseio.com/product/$id.json';
-     final existingProductIndex   = _items.indexWhere( (prod) => prod.id == id );
-     var existingProduct         = _items[existingProductIndex];
-    if(existingProductIndex >= 0){
-
-
-        final response = await http.patch(url, body: json.encode({
-          'isFavorite': isFavorites
-        }));
-
-        if(response.statusCode >= 400){
-          //rollback data
-          _items.insert(existingProductIndex, existingProduct);
-          notifyListeners();
-          throw HttpException('Could the delete product');
-        }
-
-        _items[existingProductIndex].isFavorite = isFavorites;
-        notifyListeners();
-     
-       
-    }
-  }  
 }

@@ -34,15 +34,10 @@ class ProductItem extends StatelessWidget {
               icon:  Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border
               ),
-              onPressed: () async {
-               product.toggleFavoriteStatus();
-
-                try{
-                  await Provider.of<Products>(context).isFavoriteProduct(product.id, product.isFavorite);
-                   scaffold.showSnackBar(SnackBar(content: Text('is favorites product')));
-                } catch (err){
-                  scaffold.showSnackBar(SnackBar(content: Text('Failed to favorites')));
-                }
+              onPressed: ()  {
+              
+                  product.toggleFavoriteStatus();
+               
               },
             ),
           ),
