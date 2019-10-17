@@ -113,7 +113,7 @@ class Products with ChangeNotifier{
 
   void updateProduct(String id, Product product) async {
     final prodIndex = _items.indexWhere( (prod) => prod.id == id);
-    final url       = 'https://flutter-update-32aaf.firebaseio.com/products/$id.json';
+    final url       = 'https://flutter-update-32aaf.firebaseio.com/product/$id.json';
     if(prodIndex >= 0){
        try{
          await http.patch(url, body: json.encode({
@@ -134,7 +134,21 @@ class Products with ChangeNotifier{
   }
 
   void removeProduct(String id){
-    _items.removeWhere( (prod) => prod.id == id);
+    final url       = 'https://flutter-update-32aaf.firebaseio.com/product/$id.json';
+    final existingProductIndex  = _items.indexWhere( (prod) => prod.id == id );
+    var existingProduct         = _items[existingProductIndex];
+ 
+    http.delete(url).then( (response){
+      if(response.statusCode >= 400){
+
+      }
+      existingProduct = null;
+    }).catchError( (err){
+      _items.insert(existingProductIndex, existingProduct);
+      notifyListeners();
+    });
+   _items.removeAt( existingProductIndex );
     notifyListeners();
   }
+  
 }
