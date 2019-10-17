@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../screens/product_detail_screens.dart';
 import '../providers/product.dart';
 import '../providers/cart.dart';
+import '../providers/products.dart';
 
 class ProductItem extends StatelessWidget {
 
@@ -11,7 +12,7 @@ class ProductItem extends StatelessWidget {
     //fetch data from provider
     final product = Provider.of<Product>(context, listen: false);
     final cart    = Provider.of<Cart>(context, listen: false);
-
+    final scaffold = Scaffold.of(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -33,8 +34,15 @@ class ProductItem extends StatelessWidget {
               icon:  Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border
               ),
-              onPressed: (){
-                product.toggleFavoriteStatus();
+              onPressed: () async {
+               product.toggleFavoriteStatus();
+
+                try{
+                  await Provider.of<Products>(context).isFavoriteProduct(product.id, product.isFavorite);
+                   scaffold.showSnackBar(SnackBar(content: Text('is favorites product')));
+                } catch (err){
+                  scaffold.showSnackBar(SnackBar(content: Text('Failed to favorites')));
+                }
               },
             ),
           ),
