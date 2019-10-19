@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import './screens/cart_screens.dart';
 import './screens/product_detail_screens.dart';
-// import './screens/products_overview_screens.dart';
+import './screens/products_overview_screens.dart';
 import './providers/auth.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           value: Orders(),
         )
       ],
-      child: MaterialApp(
+      child: Consumer<Auth>(builder: (ctx, authData, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             )
           )
         ),
-        home: AuthScreen(),
+        home: authData.isAuth ? ProductOverviewScreens() : AuthScreen(),
         routes: {
             ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
             CartScreens.routeName: (ctx) => CartScreens(),
@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
             CustomCard.routeName: (ctx) => CustomCard()
           },
         ),
+      ) 
     );
   }
 }

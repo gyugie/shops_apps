@@ -144,8 +144,8 @@ class _AuthCardState extends State<AuthCard> {
       } else {
         // Sign user 
         await Provider.of<Auth>(context).signUp(_authData['email'], _authData['password']);
-      }
       _showAlertDialog('Success', 'You have sign now');
+      }
     } on HttpException catch (err){
       var errorMessage = 'Authentication failed';
       if(err.toString().contains('EMAIL_EXISTS')){
