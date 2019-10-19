@@ -20,6 +20,14 @@ class Auth with ChangeNotifier{
     return null;
   }
 
+  String get userId{
+     if(_token != null && _userId != null && _expiredToken.isAfter(DateTime.now())){
+      return _userId;
+    }
+
+    return null;
+  }
+
   Future<void> _authentication(String email, String password, String urlParams) async {
     final url = 'https://identitytoolkit.googleapis.com/v1/accounts:$urlParams?key=AIzaSyCvbiqZMNpvRCGm0PdKF2bfMkXGB19SOkU';
 
