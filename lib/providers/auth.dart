@@ -31,7 +31,6 @@ class Auth with ChangeNotifier{
         }));
 
         final responseData = json.decode(response.body);
-
         if(responseData['error'] != null){
           throw HttpException(responseData['error']['message']);
         }
@@ -41,7 +40,7 @@ class Auth with ChangeNotifier{
         _userId       = responseData['localId'];
 
         notifyListeners();
-        
+
     }catch(err){
       throw err;
     }
