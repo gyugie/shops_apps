@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import './screens/cart_screens.dart';
 import './screens/product_detail_screens.dart';
-import './screens/products_overview_screens.dart';
+// import './screens/products_overview_screens.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
@@ -10,6 +11,7 @@ import './screens/order_screens.dart';
 import './screens/user_product_screens.dart';
 import './screens/edit_product_screens.dart';
 import './screens/offset.dart';
+import './screens/auth_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
             )
           )
         ),
-        home: ProductOverviewScreens(),
+        home: AuthScreen(),
         routes: {
             ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
             CartScreens.routeName: (ctx) => CartScreens(),
