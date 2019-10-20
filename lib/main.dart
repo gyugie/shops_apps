@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_apps/helpers/custom_route.dart';
 import './screens/splash_screen.dart';
-
+import './helpers/custom_route.dart';
 import './screens/cart_screens.dart';
 import './screens/product_detail_screens.dart';
 import './screens/products_overview_screens.dart';
@@ -65,7 +66,13 @@ class MyApp extends StatelessWidget {
               fontSize: 12,
               fontFamily: 'Hind'
             )
-          )
+          ),
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CustomPageTransitionBuilder(),
+              TargetPlatform.iOS: CustomPageTransitionBuilder()
+            },
+          ),
         ),
         home: authData.isAuth 
         ? ProductOverviewScreens() 
