@@ -63,5 +63,12 @@ class Auth with ChangeNotifier{
    return _authentication(email, password, 'signInWithPassword');
   }
 
+  Future<void> logout(){
+    _token = null;
+    _expiredToken = null;
+    _userId = null;
+
+    notifyListeners();
+  }
 
 }
