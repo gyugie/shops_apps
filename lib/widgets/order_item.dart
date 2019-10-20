@@ -19,7 +19,9 @@ class _OrderItemState extends State<OrderItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return AnimatedContainer( 
+      duration: Duration(milliseconds: 500),
+      height: _expanded ? min(widget.order.products.length * 20.0 + 110, 200) : 90 ,
       margin: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
@@ -36,38 +38,42 @@ class _OrderItemState extends State<OrderItem> {
               },
             ),
           ),
-          if(_expanded)
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 5
-              ),
-              height: min(widget.order.products.length * 20.0 + 10, 100),
-              child: ListView(
-                children: widget.order.products
-                  .map( 
-                    (prod) => Row(
-                        children: <Widget>[
-                          Text(
-                            prod.title, 
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              )
-                          ),
-                          Text(
-                            '${prod.quantity} x \$${prod.price}', 
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey
-                            ),
-                          ),
-                        ],
-                      ),
-                    ).toList(),
-              ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            height: _expanded ? min(widget.order.products.length * 20.0 + 10, 200) : 0,
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 5
             ),
+            child: ListView(
+              children: widget.order.products
+                .map( 
+                  (prod) => Row(
+                      
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          prod.title, 
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            ),
+                            softWrap: true,
+                        ),
+                        Text(
+                          '${prod.quantity} x \$${prod.price}', 
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey
+                          ),
+                          softWrap: true,
+                        ),
+                      ],
+                    ),
+                  ).toList(),
+            ),
+          ),
         ],
       ),
     );
